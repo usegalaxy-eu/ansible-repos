@@ -7,7 +7,8 @@
 
 - name: Add repository (RedHat)
   yum_repository:
-    name: epel
-    description: Galaxyproject repo
+    name: galaxy
+    description: Galaxy Packages for Enterprise Linux $releasever - $basearch
     baseurl: https://depot.galaxyproject.org/yum/el/$releasever/$basearch/
+    gpgcheck: no
   when: ansible_os_family == "RedHat"
