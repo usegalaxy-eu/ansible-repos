@@ -1,0 +1,13 @@
+---
+- name: Add repositories (Debian)
+  apt_repository:
+    repo: ppa:galaxyproject/nginx
+    state: present
+  when: ansible_os_family == "Debian"
+
+- name: Add repository (RedHat)
+  yum_repository:
+    name: epel
+    description: Galaxyproject repo
+    baseurl: https://depot.galaxyproject.org/yum/el/$releasever/$basearch/
+  when: ansible_os_family == "RedHat"
