@@ -1,9 +1,9 @@
 ---
-#- name: Add repositories (Debian)
-  #apt_repository:
-    #repo: ppa:galaxyproject/nginx
-    #state: present
-  #when: ansible_os_family == "Debian" and ansible_distribution_version is version('18.04', '<')
+- name: Add slurm-drmaa PPA (Ubuntu)
+  apt_repository:
+    repo: ppa:natefoo/slurm-drmaa
+    state: present
+  when: ansible_distribution == "Ubuntu" and ansible_distribution_version is version('18.04', '==')
 
 - name: Add repository (RedHat)
   yum_repository:
