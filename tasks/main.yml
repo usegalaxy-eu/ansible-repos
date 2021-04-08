@@ -12,3 +12,17 @@
     baseurl: https://depot.galaxyproject.org/yum/el/$releasever/$basearch/
     gpgcheck: no
   when: ansible_os_family == "RedHat"
+
+- name: Add slurm-drmaa (Debian)
+  block:
+    - name: Ensure that source GPG key is known
+      ansible.builtin.apt_key:
+        keyserver: hkp://pool.sks-keyservers.net
+        id: 18381AC8832160AF
+    - name: Ensure that galaxyproject depot sources are available
+      apt_repository:
+        repo: "deb https://depot.galaxyproject.org/apt/ {{ ansible_distribution_release }} main"
+        state: present
+        filename: galaxy-depot
+  when: ansible_distribution == "Debian" and ansible_distribution_version is version('10', '>=')
+  
